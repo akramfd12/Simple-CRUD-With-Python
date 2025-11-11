@@ -8,7 +8,7 @@ def menu_utama ():
     """
     return menu_utama
 
-def menu_admin ():
+def menu_admin():
     menu_admin = """
     Selamat datang di Menu Admin
     Menu Admin:
@@ -23,7 +23,7 @@ def menu_admin ():
     """
     return menu_admin
 
-def menu_pinjam ():
+def menu_pinjam():
     menu_pinjam = """
     Selamat datang di Menu Peminjaman Buku
     Menu Peminjaman Buku:
@@ -35,10 +35,36 @@ def menu_pinjam ():
     """
     return menu_pinjam
 
-def menu_search ():
+def menu_search_book():
     menu_search = """
     Search Book
     1. Cari Buku
-    2. Kembali ke Menu Admin
+    2. Kembali ke Menu Sebelumnya
     """
     return menu_search 
+
+def menu_admin_read():
+    menu_admin_read = """
+    Search Book
+    1. Daftar Buku
+    2. Daftar Peminjam Buku
+    3. Kembali ke Menu Admin
+    """
+    return menu_admin_read 
+
+def menu_search_pinjam():
+    menu_search = """
+    Search Book
+    1. Cari Peminjam Buku
+    2. Kembali Ke Menu Sebelumnya
+    """
+    return menu_search 
+
+def menu_delete():
+    menu_delete = """
+    Search Book
+    1. Hapus Buku
+    2. Hapus Peminjam
+    3. Kembali Ke Menu Sebelumnya
+    """
+    return menu_delete 
