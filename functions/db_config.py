@@ -78,6 +78,13 @@ def update_data_flagpinjam(tanggal_selesai, id_pinjam):
     db.commit()
     cursor_update_flagpinjam.close()
 
+#delete query data pinjam
+def delete_data_pinjam(id_deletepinjam):
+    cursor_delete_pinjam = db.cursor()
+    cursor_delete_pinjam.execute(""" DELETE FROM pinjam WHERE id = %s  """,(id_deletepinjam,))
+    db.commit()
+    cursor_delete_pinjam.close()
+
 def close_conn():
     db.close
 
