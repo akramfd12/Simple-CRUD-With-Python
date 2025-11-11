@@ -11,9 +11,18 @@ def search_book(id):
     return df
 
 def read_pinjam():
-    print("Menampilkan Daftar Pinjam")
+    print("\nMenampilkan Daftar Pinjam\n")
     df = pd.DataFrame(read_data_pinjam())
-    df.rename(columns={
-    'lamahari_pinjam': 'lamahari',
-    'flag_pinjam': 'status'}, inplace=True)
+    df.rename(columns={'lamahari_pinjam': 'lamahari','flag_pinjam': 'status'}, inplace=True)
+    return df
+
+def search_pinjam(id):
+    df = read_pinjam()
+    df = df[df['id'] == id]
+    return df
+
+def merge_book_pinjam():
+    df_book = read_book()
+    df_pinjam = read_pinjam()
+    df =  pd.merge(df_book, df_pinjam, left_on= "id", right_on= "id_buku")
     return df
