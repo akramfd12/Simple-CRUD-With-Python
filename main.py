@@ -6,15 +6,20 @@ from functions.update import update_book, update_flagpinjam
 from functions.read import read_book, search_book, read_pinjam, search_pinjam, merge_book_pinjam
 from functions.delete import delete_book, delete_pinjam
 from functions.exitprog import close_prog
+from functions.stat_data import pinjam_statistic_total, pinjam_statistic_total_year, pinjam_statistic_total_year_month
 from functions.menu import * 
 
 def test():
     pd.set_option('display.max_columns', None)
     df = merge_book_pinjam()
     print(df)
-    # input_user = int((input("Masukkan ID: ")))
-    # df_search_pinjam = search_pinjam(input_user)
-    # print(df_search_pinjam)
+    print("Menampilkan daftar kolom")
+    df_columns = df[["title","genre","lamahari","month_pinjam","year_pinjam","flag_late","nama_pinjam"]]
+    for col in df_columns.columns:
+        print(col)
+    kolom = input("Masukkkan Kolom: ")
+    year_pinjam = int(input("Masukkan Tahun Pinjam:"))
+    df = pinjam_statistic_total_year_month(kolom, year_pinjam, month_start=2,month_end=2)
 
 def admin():
     pd.set_option('display.max_columns', None)
@@ -84,7 +89,6 @@ def admin():
 
         #Delete Data
         if input_user == 4:
-            print(menu_delete())
             while True:
                 print(menu_delete())
                 input_delete = int(input("\nMasukkan angka: "))
@@ -109,8 +113,33 @@ def admin():
 
         #Statistik data
         if input_user == 6:
-            pass
-
+            df_merge = merge_book_pinjam()
+            df_columns = df_merge[["title","genre","lamahari","month_pinjam","year_pinjam","flag_late","nama_pinjam"]]
+            # input_menu_stat = int(input("Masukkan Angka: "))
+            while True:
+                print(menu_stat_total())
+                input_menu_stat = int(input("Masukkan Angka: "))
+                if input_menu_stat == 1:
+                    print("Menampilkan daftar kolom")
+                    print(df_columns.columns) 
+                    kolom = input("Masukkkan Kolom: ")
+                    df_total_stat = pinjam_statistic_total(kolom)
+                elif input_menu_stat == 2:
+                    print("Menampilkan daftar kolom")
+                    print(df_columns.columns)
+                    kolom = input("Masukkkan Kolom: ")
+                    year_pinjam = int(input("Masukkkan Tahun: "))
+                    df_total_stat_year = pinjam_statistic_total_year(kolom, year_pinjam)  
+                elif input_menu_stat == 3:
+                    print("Menampilkan daftar kolom")
+                    print(df_columns.columns)
+                    kolom = input("Masukkkan Kolom: ")
+                    year_pinjam = int(input("Masukkkan Tahun: "))
+                    start_month = int(input("Masukkkan Start Bulan: "))
+                    end_month = int(input("Masukkkan End Bulan: "))
+                    df_total_stat_year_month = pinjam_statistic_total_year_month(kolom, year_pinjam, start_month, end_month)
+                elif input_menu_stat == 4:
+                    break
         #Back to menu
         if input_user == 7:
             run = False
@@ -132,8 +161,9 @@ def pinjam_buku():
 
         #Selesai Pinjam
         if input_menu_pinjam == 2:
-            df = read_pinjam()
-            print(df)
+            df_selesai = read_pinjam()
+            df_selesai = df_selesai[df_selesai['status'] == "borrowed"]
+            print(df_selesai)
             input_user = (input("Masukkan ID: "))
             update_flagpinjam(input_user)
 
@@ -181,6 +211,7 @@ def main():
         if input_menu_awal == 3:
             close_prog()
             run = False 
-        
+  
+
 if __name__ == "__main__":
     main()
