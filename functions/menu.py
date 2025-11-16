@@ -78,3 +78,15 @@ def menu_stat_total():
     4. Kembali ke Menu Sebelumnya
     """
     return menu_stat_total
+
+def menu_visualisasi():
+    menu_vis = """
+    Menu Visualisasi
+    1. Barlplot
+    2. Histogram
+    3. Lineplot
+    4. Scatterplot
+    5. pivotdata
+    6. Kembali ke Menu Sebelumnya
+    """
+    return menu_vis
