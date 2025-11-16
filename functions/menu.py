@@ -45,7 +45,7 @@ def menu_search_book():
 
 def menu_admin_read():
     menu_admin_read = """
-    Search Book
+    Menu Search
     1. Daftar Buku
     2. Daftar Peminjam Buku
     3. Kembali ke Menu Admin
@@ -62,9 +62,19 @@ def menu_search_pinjam():
 
 def menu_delete():
     menu_delete = """
-    Search Book
+    Menu Delete
     1. Hapus Buku
     2. Hapus Peminjam
     3. Kembali Ke Menu Sebelumnya
     """
     return menu_delete 
+
+def menu_stat_total():
+    menu_stat_total = """
+    Menu Statistik
+    1. Tanpa Filter
+    2. Filter Tahun
+    3. Filter Tahun dan Bulan
+    4. Kembali ke Menu Sebelumnya
+    """
+    return menu_stat_total
