@@ -8,18 +8,17 @@ from functions.delete import delete_book, delete_pinjam
 from functions.exitprog import close_prog
 from functions.stat_data import pinjam_statistic_total, pinjam_statistic_total_year, pinjam_statistic_total_year_month
 from functions.menu import * 
+from functions.visual_data import *
 
 def test():
-    pd.set_option('display.max_columns', None)
-    df = merge_book_pinjam()
-    print(df)
-    print("Menampilkan daftar kolom")
-    df_columns = df[["title","genre","lamahari","month_pinjam","year_pinjam","flag_late","nama_pinjam"]]
-    for col in df_columns.columns:
-        print(col)
-    kolom = input("Masukkkan Kolom: ")
-    year_pinjam = int(input("Masukkan Tahun Pinjam:"))
-    df = pinjam_statistic_total_year_month(kolom, year_pinjam, month_start=2,month_end=2)
+    df_merge = merge_book_pinjam()
+    df_columns = df_merge[["title","genre","lamahari","month_pinjam","year_pinjam","flag_late","nama_pinjam"]]
+    print(df_columns.columns)
+    input_kolom_visual = input("Masukkan Kolom: ")
+    input_tahun_visual = int(input("Masukkan Tahun: "))
+    scatterplot(input_kolom_visual, input_tahun_visual)
+    print(pivot_data())
+    
 
 def admin():
     pd.set_option('display.max_columns', None)
@@ -109,8 +108,39 @@ def admin():
 
         #Visualisasi data
         if input_user == 5:
-            pass
-
+            while True:
+                print(menu_visualisasi())
+                input_menu_vis = int(input("Masukkan Angka: "))
+                if input_menu_vis == 1:
+                    print("Menampilkan daftar kolom")
+                    print(col_vis())
+                    kolom_vis = input("Masukkan Kolom: ")
+                    filter_vis_year = int(input("Masukkan Tahun: "))
+                    barplot(kolom_vis, filter_vis_year)
+                elif input_menu_vis == 2:
+                    print("Menampilkan daftar kolom")
+                    print(col_vis())
+                    kolom_vis = input("Masukkan Kolom: ")
+                    filter_vis_year = int(input("Masukkan Tahun: "))
+                    histogram(kolom_vis, filter_vis_year)            
+                elif input_menu_vis == 3:
+                    print("Menampilkan daftar kolom")
+                    print(col_vis())
+                    kolom_vis = input("Masukkan Kolom: ")
+                    filter_vis_year = int(input("Masukkan Tahun: "))
+                    lineplot(kolom_vis, filter_vis_year)    
+                elif input_menu_vis == 4:
+                    print("Menampilkan daftar kolom")
+                    print(col_vis())
+                    kolom_vis = input("Masukkan Kolom: ")
+                    filter_vis_year = int(input("Masukkan Tahun: "))
+                    scatterplot(kolom_vis, filter_vis_year) 
+                elif input_menu_vis == 5:
+                    print(pivot_data())
+                elif input_menu_vis == 6:
+                    break  
+                else:
+                    print("Pilihan tidak valid!")      
         #Statistik data
         if input_user == 6:
             df_merge = merge_book_pinjam()
@@ -122,24 +152,26 @@ def admin():
                 if input_menu_stat == 1:
                     print("Menampilkan daftar kolom")
                     print(df_columns.columns) 
-                    kolom = input("Masukkkan Kolom: ")
-                    df_total_stat = pinjam_statistic_total(kolom)
+                    kolom_stat = input("Masukkkan Kolom: ")
+                    df_total_stat = pinjam_statistic_total(kolom_stat)
                 elif input_menu_stat == 2:
                     print("Menampilkan daftar kolom")
                     print(df_columns.columns)
-                    kolom = input("Masukkkan Kolom: ")
+                    kolom_stat = input("Masukkkan Kolom: ")
                     year_pinjam = int(input("Masukkkan Tahun: "))
-                    df_total_stat_year = pinjam_statistic_total_year(kolom, year_pinjam)  
+                    df_total_stat_year = pinjam_statistic_total_year(kolom_stat, year_pinjam)  
                 elif input_menu_stat == 3:
                     print("Menampilkan daftar kolom")
                     print(df_columns.columns)
-                    kolom = input("Masukkkan Kolom: ")
+                    kolom_stat = input("Masukkkan Kolom: ")
                     year_pinjam = int(input("Masukkkan Tahun: "))
                     start_month = int(input("Masukkkan Start Bulan: "))
                     end_month = int(input("Masukkkan End Bulan: "))
-                    df_total_stat_year_month = pinjam_statistic_total_year_month(kolom, year_pinjam, start_month, end_month)
+                    df_total_stat_year_month = pinjam_statistic_total_year_month(kolom_stat, year_pinjam, start_month, end_month)
                 elif input_menu_stat == 4:
                     break
+                else:
+                    print("Pilihan tidak valid!")
         #Back to menu
         if input_user == 7:
             run = False
