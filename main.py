@@ -10,16 +10,6 @@ from functions.stat_data import pinjam_statistic_total, pinjam_statistic_total_y
 from functions.menu import * 
 from functions.visual_data import *
 
-def test():
-    df_merge = merge_book_pinjam()
-    df_columns = df_merge[["title","genre","lamahari","month_pinjam","year_pinjam","flag_late","nama_pinjam"]]
-    print(df_columns.columns)
-    input_kolom_visual = input("Masukkan Kolom: ")
-    input_tahun_visual = int(input("Masukkan Tahun: "))
-    scatterplot(input_kolom_visual, input_tahun_visual)
-    print(pivot_data())
-    
-
 def admin():
     pd.set_option('display.max_columns', None)
     run = True
